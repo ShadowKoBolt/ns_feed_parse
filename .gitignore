@@ -24,4 +24,4 @@ config/secrets.yml
 .rvmrc
 
 .vagrant/
-db/schema.rb
+/db/schema.rb
