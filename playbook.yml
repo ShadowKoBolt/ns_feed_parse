@@ -1,0 +1,14 @@
+---
+ - hosts: default
+   sudo: yes
+   vars: 
+     - ruby_version: ruby2.0
+     - rails_postgresql_db_name: ns_feed_parse
+    
+   roles:
+     - ShadowKoBolt.core
+     - ShadowKoBolt.rails-common
+
+   tasks:
+     - name: install ffmpeg
+       apt: name=libav-tools state=present update_cache=yes

@@ -1,0 +1,11 @@
+h1 Datasets 
+
+p = link_to 'Search again', root_path
+
+- if @datasets.any?
+  .list-group.dataset-results
+    - @datasets.each do |dataset|
+      a.list-group-item href=parish_path(area_id: dataset.api_code)
+        span.name = dataset.name
+- else
+  h2 No Datasets

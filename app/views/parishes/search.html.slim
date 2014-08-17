@@ -1,0 +1,13 @@
+h1 Results
+
+p = link_to 'Search again', root_path
+
+- if @parishes.any?
+  .list-group.parish-results
+    - @parishes.each do |parish|
+      a.list-group-item href=parish_path(area_id: parish.api_code)
+        span.name = parish.name
+        span.descriptor = parish.descriptor 
+- else
+  h2 No Results
+
