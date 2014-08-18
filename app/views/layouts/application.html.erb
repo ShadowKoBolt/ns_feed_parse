@@ -8,7 +8,12 @@
 </head>
 <body>
   <div class="container">
+    <header>
+      <h1><%= link_to t('app_name', default: 'Neighbourhood Planner'), root_path %></h1>
+    </header>
     <%= yield %>
+    <footer>
+    </footer>
   </div>
 
 </body>

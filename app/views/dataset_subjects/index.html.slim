@@ -1,0 +1,7 @@
+.list-group
+  - @dataset_subjects.each do |dataset_subject|
+    a.list-group-item href=datasets_path(area_id: params[:area_id], subject_id: dataset_subject.api_code)
+      = dataset_subject.name
+      span.badge
+        = dataset_subject.count
+

@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   post 'parishes/search'
   get 'parish/:area_id' => 'parishes#show', as: 'parish'
+  get 'parish/:area_id/dataset-subjects' => 'dataset_subjects#index', as: 'dataset_subjects'
+  get 'parish/:area_id/dataset-subject/:subject_id/datasets' => 'datasets#index', as: 'datasets'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

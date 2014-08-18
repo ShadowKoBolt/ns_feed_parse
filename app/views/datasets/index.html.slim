@@ -1,0 +1,8 @@
+- if @datasets.any?
+  .list-group.dataset-results
+    - @datasets.each do |dataset|
+      a.list-group-item href=parish_path(area_id: dataset.api_code)
+        = dataset.name
+        span.badge API ID: #{dataset.api_code}
+- else
+  h2 No Datasets

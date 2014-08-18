@@ -2,9 +2,9 @@ module Api
   class Dataset
 
     attr_accessor :name, :api_code
-    def self.search_by_area_id(area_id)
+    def self.search_by_area_id_and_subject_id(area_id, subject_id)
       response = Api::DiscoveryApi.client.call(:get_datasets) do
-        message 'ns2:SubjectId' => 7, 'ns2:Areaid' => area_id
+        message 'ns2:SubjectId' => subject_id, 'ns2:Areaid' => area_id
       end
       get_datasets_response_element = response.body[:get_datasets_response_element]
       return [] if get_datasets_response_element[:ds_families].nil?

@@ -4,7 +4,8 @@ class ParishesController < ApplicationController
   end
 
   def show
-    @datasets = Api::Dataset.search_by_area_id(params[:area_id])
+    @parish = Api::Parish.from_area_id(params[:area_id])
+    @parish.get_population
   end
 
 end

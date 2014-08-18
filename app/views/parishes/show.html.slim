@@ -1,11 +1,16 @@
-h1 Datasets 
+.panel.panel-default
+  .panel-heading
+    h2.panel-title Parish Details
+  .panel-body
+    strong> Name:
+    = @parish.name
+    br
+    strong> Ext Code:
+    = @parish.ext_code
+    br
+    strong> API Code:
+    = @parish.api_code
 
-p = link_to 'Search again', root_path
-
-- if @datasets.any?
-  .list-group.dataset-results
-    - @datasets.each do |dataset|
-      a.list-group-item href=parish_path(area_id: dataset.api_code)
-        span.name = dataset.name
-- else
-  h2 No Datasets
+.list-group
+  a.list-group-item href=dataset_subjects_path(area_id: params[:area_id])
+    | Browse Datasets
