@@ -14,3 +14,10 @@
 .list-group
   a.list-group-item href=dataset_subjects_path(area_id: params[:area_id])
     | Browse Datasets
+
+h3 2001 Population
+table.table.table-striped
+  - @population.each do |population|
+    tr
+      th = population.first
+      td = population.last

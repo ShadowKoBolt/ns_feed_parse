@@ -47,7 +47,16 @@ module Api
         message 'Areas' => api_code, 'Datasets' => PopulationTableId
       end
       topics = response.body[:get_data_cube_response_element][:datasets][:dataset][:topics][:topic]
-      binding.pry
+      topics = topics.sort_by{|i| i[:topic_code] }
+      topic_hash = {}
+      topics.each{|t| topic_hash[t[:topic_id]] = t[:topic_metadata][:title] }
+      dataset_items = response.body[:get_data_cube_response_element][:datasets][:dataset][:dataset_items][:dataset_item]
+      population = []
+      topic_hash.each_pair do |k,v|
+        dataset_item = dataset_items.find{|i| i[:topic_id] == k}
+        population << [v, dataset_item[:value]]
+      end
+      population
     end
 
   end

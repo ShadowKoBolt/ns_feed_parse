@@ -5,7 +5,7 @@ class ParishesController < ApplicationController
 
   def show
     @parish = Api::Parish.from_area_id(params[:area_id])
-    @parish.get_population
+    @population = @parish.get_population
   end
 
 end
