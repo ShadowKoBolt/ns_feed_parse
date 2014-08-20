@@ -1,7 +1,5 @@
-h1 Parish Search
-
 = form_tag parishes_search_path do 
   .form-group
-    = label_tag :q, t('.parish_search_prompt', default: 'Parish name')
+    = label_tag :q, t('.parish_search_prompt', default: 'Parish search')
     = text_field_tag :q, nil, class: 'form-control', required: true
   = submit_tag t('.parish_search_button', default: 'Search'), class: 'btn btn-primary'

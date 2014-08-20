@@ -36,9 +36,11 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 gem 'pry'
+gem 'pry-nav'
 gem 'savon'
 gem 'slim-rails'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 gem 'pg'
 gem 'rails_12factor'
+gem 'chartkick'

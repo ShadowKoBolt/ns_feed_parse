@@ -1,4 +1,5 @@
 - if @parishes.any?
+  h3 #{@parishes.length} results found for "#{params[:q]}", please select your desired parish:
   .list-group.parish-results
     - @parishes.each do |parish|
       a.list-group-item href=parish_path(area_id: parish.api_code)
