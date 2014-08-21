@@ -41,6 +41,14 @@ module Api
       parish
     end
 
+    def get_dataset_json(dataset_id)
+      api_code = self.api_code
+      response = Api::DeliveryApi.client.call(:get_tables) do
+        message 'Areas' => api_code, 'Datasets' => dataset_id
+      end
+      response.body
+    end
+
     def get_population
       api_code = self.api_code
       response = Api::DeliveryApi.client.call(:get_tables) do
@@ -58,6 +66,5 @@ module Api
       end
       population
     end
-
   end
 end

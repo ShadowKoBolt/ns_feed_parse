@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'parish/:area_id' => 'parishes#show', as: 'parish'
   get 'parish/:area_id/dataset-subjects' => 'dataset_subjects#index', as: 'dataset_subjects'
   get 'parish/:area_id/dataset-subject/:subject_id/datasets' => 'datasets#index', as: 'datasets'
+  get 'parish/:area_id/dataset-subject/:subject_id/datasets/:dataset_id' => 'datasets#show', as: 'dataset'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

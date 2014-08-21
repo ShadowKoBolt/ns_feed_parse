@@ -1,7 +1,7 @@
 - if @datasets.any?
   .list-group.dataset-results
     - @datasets.each do |dataset|
-      a.list-group-item href=parish_path(area_id: dataset.api_code)
+      a.list-group-item href=dataset_path(area_id: params[:area_id], subject_id: params[:subject_id], dataset_id: dataset.api_code)
         = dataset.name
         span.badge API ID: #{dataset.api_code}
 - else
