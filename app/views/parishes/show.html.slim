@@ -19,14 +19,30 @@
   .panel-heading
     h2.panel-title 2001 Population
   .panel-body
-    = column_chart @population_graph_data[0..5], height: '500px'
+    = high_chart("population_graph", @population_graph)
     table.table.table-striped
       thead 
         tr
           th Age group
-          th Count
+          th 2011 Count
       tbody
         - @population_table_data.each do |population|
           tr
-            th = population.first
+            td = population.first
             td = population.last
+
+.panel.panel-default.panel-collapse
+  .panel-heading
+    h2.panel-title 2011 Bedrooms
+  .panel-body
+    = high_chart("dwelling_graph", @dwelling_graph)
+    table.table.table-striped
+      thead 
+        tr
+          th Number of bedrooms
+          th Count
+      tbody
+        - @dwelling_table_data.each do |dwelling|
+          tr
+            th = dwelling.first
+            td = dwelling.last
