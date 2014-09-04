@@ -20,13 +20,13 @@ class ParishesController < ApplicationController
     def tidy_population_for_table(data)
       ret = []
       ret << data[0]
-      ret << ['0-10', data[1..11].collect{|d| d.last.to_i}.sum]
-      ret << ['11-20', data[12..21].collect{|d| d.last.to_i}.sum]
-      ret << ['21-30', data[22..31].collect{|d| d.last.to_i}.sum]
-      ret << ['31-40', data[32..41].collect{|d| d.last.to_i}.sum]
-      ret << ['41-50', data[42..51].collect{|d| d.last.to_i}.sum]
-      ret << ['51-60', data[52..61].collect{|d| d.last.to_i}.sum]
-      ret << ['60+', data[61..-1].collect{|d| d.last.to_i}.sum]
+      ret << ['0-10', data[1..11].collect{|d| d.second.to_i}.sum, data[1..11].collect{|d| d.third.to_i}.sum]
+      ret << ['11-20', data[12..21].collect{|d| d.second.to_i}.sum, data[12..21].collect{|d| d.third.to_i}.sum]
+      ret << ['21-30', data[22..31].collect{|d| d.second.to_i}.sum, data[22..31].collect{|d| d.third.to_i}.sum]
+      ret << ['31-40', data[32..41].collect{|d| d.second.to_i}.sum, data[32..41].collect{|d| d.third.to_i}.sum]
+      ret << ['41-50', data[42..51].collect{|d| d.second.to_i}.sum, data[42..51].collect{|d| d.third.to_i}.sum]
+      ret << ['51-60', data[52..61].collect{|d| d.second.to_i}.sum, data[52..61].collect{|d| d.third.to_i}.sum]
+      ret << ['60+', data[62..-1].collect{|d| d.second.to_i}.sum, data[62..-1].collect{|d| d.third.to_i}.sum]
       ret
     end
     
@@ -35,7 +35,8 @@ class ParishesController < ApplicationController
       @chart = LazyHighCharts::HighChart.new('line') do |f|
         f.title(:text => "Population in area by age group")
         f.xAxis(:categories => data.collect(&:first))
-        f.series(:name => "2011", :data => data.collect(&:last))
+        f.series(:name => "2001", :data => data.collect(&:second))
+        f.series(:name => "2011", :data => data.collect(&:third))
       end
     end
 

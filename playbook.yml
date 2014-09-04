@@ -8,6 +8,7 @@
    roles:
      - ShadowKoBolt.core
      - ShadowKoBolt.rails-common
+     - ShadowKoBolt.vagrant-fresh
 
    tasks:
      - name: install ffmpeg

@@ -1,6 +1,7 @@
 class Api::Parish
 
   PopulationTable2001Id = 91
+  PopulationTable2011Id = 2545
   Dwellings2001Id = 2556
   Dwellings2011Id = 2512
 
@@ -55,7 +56,12 @@ class Api::Parish
     response = Api::DeliveryApi.client.call(:get_tables) do
       message 'Areas' => api_code, 'Datasets' => PopulationTable2001Id
     end
-    Api::Dataset.body_to_simple_array(response.body)
+    data_2001 = Api::Dataset.body_to_simple_array(response.body)
+    response = Api::DeliveryApi.client.call(:get_tables) do
+      message 'Areas' => api_code, 'Datasets' => PopulationTable2011Id
+    end
+    data_2011 = Api::Dataset.body_to_simple_array(response.body)
+    Api::Dataset.join(data_2001, data_2011)
   end
 
   def get_dwellings

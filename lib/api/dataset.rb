@@ -40,4 +40,16 @@ class Api::Dataset
     data
   end
 
+  def self.join(*datasets)
+    ret = []
+    datasets.first.each_with_index do |item,index|
+      row = [item.first, item.second]
+      datasets[1..-1].each do |dataset|
+        row << dataset[index].second
+      end
+      ret << row
+    end
+    ret
+  end
+
 end

@@ -17,19 +17,21 @@
 
 .panel.panel-default.panel-collapse
   .panel-heading
-    h2.panel-title 2001 Population
+    h2.panel-title Population
   .panel-body
     = high_chart("population_graph", @population_graph)
     table.table.table-striped
       thead 
         tr
           th Age group
+          th 2001 Count
           th 2011 Count
       tbody
         - @population_table_data.each do |population|
           tr
             td = population.first
-            td = population.last
+            td = population.second
+            td = population.third
 
 .panel.panel-default.panel-collapse
   .panel-heading
