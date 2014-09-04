@@ -2,8 +2,8 @@ class Api::Parish
 
   PopulationTable2001Id = 91
   PopulationTable2011Id = 2545
-  Dwellings2001Id = 2556
-  Dwellings2011Id = 2512
+  Dwellings2011Id = 2556
+  EnglandAreaCode = 11119395
 
   attr_accessor :name, :descriptor, :api_code, :ext_code
   def self.search_by_name(query)
@@ -67,8 +67,13 @@ class Api::Parish
   def get_dwellings
     api_code = self.api_code
     response = Api::DeliveryApi.client.call(:get_tables) do
-      message 'Areas' => api_code, 'Datasets' => Dwellings2001Id
+      message 'Areas' => api_code, 'Datasets' => Dwellings2011Id
     end
-    Api::Dataset.body_to_simple_array(response.body)
+    area_data = Api::Dataset.body_to_simple_array(response.body)
+    response = Api::DeliveryApi.client.call(:get_tables) do
+      message 'Areas' => EnglandAreaCode, 'Datasets' => Dwellings2011Id
+    end
+    england_data = Api::Dataset.body_to_simple_array(response.body)
+    Api::Dataset.join(area_data, england_data)
   end
 end

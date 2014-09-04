@@ -65,17 +65,18 @@ class ParishesController < ApplicationController
     def tidy_dwelling_for_table(raw_dwelling_data)
       ret = raw_dwelling_data[1..-1]
       ret.pop
+      # ret = percentages_of_total(ret)
       ret
     end
 
     def dwelling_graph(data)
-      @chart = LazyHighCharts::HighChart.new('line') do |f|
-        f.title(:text => "Number of bedrooms in area by year")
-        f.xAxis(:categories => [2001, 2011])
-        data.each do |set|
-          f.series(:name => set.first, :data => [set.last.to_i, set.last.to_i])
-        end
-      end
+      # @chart = LazyHighCharts::HighChart.new('line') do |f|
+      #   f.title(:text => "Number of bedrooms in area by year")
+      #   f.xAxis(:categories => [2001, 2011])
+      #   data.each do |set|
+      #     f.series(:name => set.first, :data => [set.last.to_i, set.last.to_i])
+      #   end
+      # end
     end
 
 end

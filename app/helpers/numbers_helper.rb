@@ -6,4 +6,7 @@ module NumbersHelper
     percentage = (difference/num_1) * 100.0
     percentage.round
   end
+
+  def percentages_of_total(column)
+  end
 end
