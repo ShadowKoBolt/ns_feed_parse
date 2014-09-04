@@ -35,6 +35,22 @@
 
 .panel.panel-default.panel-collapse
   .panel-heading
+    h2.panel-title Population Change
+  .panel-body
+    = high_chart("population_change_graph", @population_change_graph)
+    table.table.table-striped
+      thead 
+        tr
+          th Age group
+          th 2001 to 2011 Change
+      tbody
+        - @population_change_table_data.each do |population|
+          tr
+            td = population.first
+            td #{population.second}%
+
+.panel.panel-default.panel-collapse
+  .panel-heading
     h2.panel-title 2011 Bedrooms
   .panel-body
     = high_chart("dwelling_graph", @dwelling_graph)

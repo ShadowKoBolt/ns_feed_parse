@@ -1,4 +1,5 @@
 class ParishesController < ApplicationController
+  include NumbersHelper
 
   def search    
     @parishes = Api::Parish.search_by_name(params[:q])
@@ -10,6 +11,8 @@ class ParishesController < ApplicationController
     raw_population_data = @parish.get_population
     @population_table_data = tidy_population_for_table(raw_population_data)
     @population_graph = population_graph(@population_table_data)
+    @population_change_table_data = convert_population_to_change(@population_table_data)
+    @population_change_graph = population_change_graph(@population_change_table_data)
     raw_dwelling_data = @parish.get_dwellings
     @dwelling_table_data = tidy_dwelling_for_table(raw_dwelling_data)
     @dwelling_graph = dwelling_graph(@dwelling_table_data)
@@ -29,6 +32,16 @@ class ParishesController < ApplicationController
       ret << ['60+', data[62..-1].collect{|d| d.second.to_i}.sum, data[62..-1].collect{|d| d.third.to_i}.sum]
       ret
     end
+
+    def convert_population_to_change(data)
+      ret = []
+      data.each do |data_row|
+        ret_row = [data_row.first]
+        ret_row << percentage_change(data_row.second, data_row.third)
+        ret << ret_row
+      end
+      ret
+    end
     
     def population_graph(data)
       data.delete_at(0)
@@ -37,6 +50,15 @@ class ParishesController < ApplicationController
         f.xAxis(:categories => data.collect(&:first))
         f.series(:name => "2001", :data => data.collect(&:second))
         f.series(:name => "2011", :data => data.collect(&:third))
+      end
+    end
+
+    def population_change_graph(data)
+      @chart = LazyHighCharts::HighChart.new('column') do |f|
+        f.title(:text => "Population change in area by age group")
+        f.xAxis(:categories => data.collect(&:first))
+        f.series(:name => "2001 - 2011 change (%)", :data => data.collect(&:second))
+        f.options[:chart][:defaultSeriesType] = "column"
       end
     end
 
