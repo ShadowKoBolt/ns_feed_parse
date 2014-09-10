@@ -53,13 +53,13 @@
   .panel-heading
     h2.panel-title 2011 Bedrooms
   .panel-body
-    /* = high_chart("dwelling_graph", @dwelling_graph) */
+    = high_chart("dwelling_graph", @dwelling_graph)
     table.table.table-striped
       thead 
         tr
           th Number of bedrooms (2011)
           th = @parish.name
-          th England
+          th England and Wales
       tbody
         - @dwelling_table_data.each do |dwelling|
           tr

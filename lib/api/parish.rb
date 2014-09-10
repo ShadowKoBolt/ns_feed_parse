@@ -3,7 +3,7 @@ class Api::Parish
   PopulationTable2001Id = 91
   PopulationTable2011Id = 2545
   Dwellings2011Id = 2556
-  EnglandAreaCode = 11119395
+  EnglandAreaCode = 11119394
 
   attr_accessor :name, :descriptor, :api_code, :ext_code
   def self.search_by_name(query)
