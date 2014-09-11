@@ -23,3 +23,6 @@ config/initializers/secret_token.rb
 .rvmrc
 
 .vagrant/
+
+# Ignore application configuration
+/config/application.yml
