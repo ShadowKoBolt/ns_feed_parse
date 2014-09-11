@@ -16,6 +16,9 @@ class ParishesController < ApplicationController
     raw_dwelling_data = @parish.get_dwellings
     @dwelling_table_data = tidy_dwelling_for_table(raw_dwelling_data)
     @dwelling_graph = dwelling_graph(@dwelling_table_data, @parish.name)
+    raw_room_data = @parish.get_rooms
+    @room_table_data = tidy_room_for_table(raw_room_data)
+    @room_graph = room_graph(@room_table_data, @parish.name)
   end
 
   private
@@ -69,11 +72,28 @@ class ParishesController < ApplicationController
       ret
     end
 
+    def tidy_room_for_table(raw_room_data)
+      ret = raw_room_data[0..(raw_room_data.count-2)]
+      ret = percentages_of_total(ret)
+      ret
+    end
+
     def dwelling_graph(data, name)
       @chart = LazyHighCharts::HighChart.new('column') do |f|
         f.title(:text => "Number of bedrooms in area versus national average")
         f.xAxis(:categories => data.collect{|s| s[0] }, :title => {:text => "Number of Bedrooms"})
         f.yAxis(:title => {:text => 'Percentage of houses with this many bedrooms'}, :min => 0)
+        f.series(:name => name, :data => data.collect{|s| s[1] })
+        f.series(:name => 'England and Wales', :data => data.collect{|s| s[2] })
+        f.options[:chart][:defaultSeriesType] = "column"
+      end
+    end
+
+    def room_graph(data, name)
+      @chart = LazyHighCharts::HighChart.new('column') do |f|
+        f.title(:text => "Number of rooms in area versus national average")
+        f.xAxis(:categories => data.collect{|s| s[0] }, :title => {:text => "Number of rooms"})
+        f.yAxis(:title => {:text => 'Percentage of houses with this many rooms'}, :min => 0)
         f.series(:name => name, :data => data.collect{|s| s[1] })
         f.series(:name => 'England and Wales', :data => data.collect{|s| s[2] })
         f.options[:chart][:defaultSeriesType] = "column"

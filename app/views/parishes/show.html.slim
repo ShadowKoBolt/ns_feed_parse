@@ -11,7 +11,7 @@
     strong> API Code:
     = @parish.api_code
 
-.list-group
+.list-group style="display:none;"
   a.list-group-item href=dataset_subjects_path(area_id: params[:area_id])
     | Browse All Datasets
 
@@ -66,3 +66,21 @@
             th = dwelling.first
             td = dwelling.second
             td = dwelling.third 
+
+.panel.panel-default.panel-collapse
+  .panel-heading
+    h2.panel-title 2011 Bedrooms
+  .panel-body
+    = high_chart("room_graph", @room_graph)
+    table.table.table-striped
+      thead 
+        tr
+          th Number of rooms (2011)
+          th = @parish.name
+          th England and Wales
+      tbody
+        - @room_table_data.each do |room|
+          tr
+            th = room.first
+            td = room.second
+            td = room.third 
